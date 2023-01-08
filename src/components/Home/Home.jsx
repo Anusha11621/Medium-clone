@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Outlet } from 'react-router-dom'
 import Multipleusers from '../Multipleusers/Multipleusers'
 let url = 'https://api.realworld.io/api/articles'
 
@@ -20,6 +21,7 @@ export default class Home extends Component {
         <button className='btn btn-dark '> Get Started</button>
         </div>
         <br></br>
+        <Outlet></Outlet>
         <Multipleusers data={this.props.data}/>
       </div>
     )
