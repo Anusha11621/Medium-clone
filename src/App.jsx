@@ -4,15 +4,25 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Signin from './components/Signin/Signin'
 import Signup from './components/Signup/Signup'
 import Home from './components/Home/Home'
+let url = 'https://api.realworld.io/api/articles'
+let tagsurl = 'https://api.realworld.io/api/tags'
 export default class App extends Component {
   constructor(props){
     super(props)
     this.state={
       signinemail :'',
       signinpassword:'',
+      signupemail:'',
+      signupusername:'',
+      signuppassword:'',
+      multiuser:null,
+      tags:null,
       error:{
         signinemail :'',
         signinpassword:'',
+        signupemail:'',
+        signupusername:'',
+        signuppassword:'',
       }
     }
   }
@@ -30,11 +40,51 @@ export default class App extends Component {
           signinpassword:value
         })
       break;
+      case "signupemail":
+        this.setState({
+          signupemail:value
+        })
+      break;
+      case "signuppassword":
+        this.setState({
+          signuppassword:value
+        })
+      break;
+      case "signupusername":
+        this.setState({
+          signupusername:value
+        })
+      break;
+      
       default:
         break;
     }
   }
-
+  componentDidMount(){
+      fetch(url)
+          .then((res)=>{return res.json()})
+          // .then((data)=>console.log(data))
+          .then((data)=>{
+            this.setState((prevState)=>{
+              return{
+                ...prevState,
+                multiuser:data
+              }
+            })
+      })
+      fetch(tagsurl)
+          .then((res)=>{return res.json()})
+          // .then((data)=>console.log(data))
+          .then((data)=>{
+            this.setState((prevState)=>{
+              return{
+                ...prevState,
+                tags:data
+              }
+            })
+      })
+  }
+  
   errorHandeler = (id,message)=>{
     this.setState((prevState)=>{
       prevState.error[id]= message
@@ -42,14 +92,14 @@ export default class App extends Component {
     })
   }
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <BrowserRouter>
       <Header/>
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
+        <Route path='/' element={<Home data={this.state} />}></Route>
         <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
-        <Route path='/signup' element={<Signup/>}></Route>
+        <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
       </Routes>
       </BrowserRouter>
     )

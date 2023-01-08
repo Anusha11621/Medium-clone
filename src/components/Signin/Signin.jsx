@@ -22,7 +22,7 @@ validation =()=>{
         this.props.error('signinpassword','*Password should not be empty')
         temp = false
     }
-    else if(!this.props.data.signinpassword.length < 6){
+    else if(this.props.data.signinpassword.length <= 6){
         this.props.error('signinpassword','*Password should be at-least 6 characters')
         temp = false
     }
