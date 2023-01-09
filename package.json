@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": " DISABLE_ESLINT_PLUGIN=true vite",
+    "build": " DISABLE_ESLINT_PLUGIN=true vite build",
+    "preview": " DISABLE_ESLINT_PLUGIN=true vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
