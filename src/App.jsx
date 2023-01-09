@@ -99,7 +99,6 @@ export default class App extends Component {
       <Routes>
         <Route path='/' match element={<Home data={this.state} />}></Route>
         <Route path='/article/:slug' element={<Singleuser data={this.state} />}></Route>
-        {/* <Route path='/article/:slug' element={<Singleuser data={this.state} />}></Route> */}
         <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
         <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
       </Routes>

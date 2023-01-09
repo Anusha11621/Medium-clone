@@ -1,7 +1,13 @@
 .nav-ul{
     list-style: none;
 }
+.navbarsticky{
+    position: sticky;
+}
 .link{
     text-decoration: none;
     color: black;
+}
+.bgc{
+    background-color: inherit;
 }
