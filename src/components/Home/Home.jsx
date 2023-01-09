@@ -21,7 +21,7 @@ export default class Home extends Component {
         <button className='btn btn-dark '> Get Started</button>
         </div>
         <br></br>
-        <Outlet></Outlet>
+        
         <Multipleusers data={this.props.data}/>
       </div>
     )

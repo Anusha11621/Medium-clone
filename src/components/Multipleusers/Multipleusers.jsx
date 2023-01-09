@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 export default class Multipleusers extends Component {
 constructor(props){
     super(props)
@@ -17,6 +18,7 @@ constructor(props){
                         this.props.data.multiuser.articles.map((data)=>{
                             return (
                                 <>
+                                <Link to={`/article/${data.slug}`}>
                                 <div  key = {data.slug}>
                                     <div className='d-flex justify-content-between'>
                                         <div className='d-flex gap-2 align-items-center'>
@@ -50,6 +52,7 @@ constructor(props){
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                                 <br></br>
                                 <hr></hr>
                                 <br></br>
@@ -74,8 +77,6 @@ constructor(props){
                 </div>
             </div>
           )
-    }
-    
-    
+    }  
   }
 }

@@ -4,7 +4,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import Signin from './components/Signin/Signin'
 import Signup from './components/Signup/Signup'
 import Home from './components/Home/Home'
-import Multipleusers from './components/Multipleusers/Multipleusers'
+// import Multipleusers from './components/Multipleusers/Multipleusers'
 import Singleuser from './components/Singleuser/Singleuser'
 let url = 'https://api.realworld.io/api/articles'
 let tagsurl = 'https://api.realworld.io/api/tags'
@@ -57,7 +57,6 @@ export default class App extends Component {
           signupusername:value
         })
       break;
-      
       default:
         break;
     }
@@ -86,7 +85,6 @@ export default class App extends Component {
             })
       })
   }
-  
   errorHandeler = (id,message)=>{
     this.setState((prevState)=>{
       prevState.error[id]= message
@@ -99,9 +97,9 @@ export default class App extends Component {
       <BrowserRouter>
       <Header/>
       <Routes>
-        <Route path='/' element={<Home data={this.state} />}></Route>
-        <Route path='/article' element={<Multipleusers data={this.state} />}></Route>
+        <Route path='/' match element={<Home data={this.state} />}></Route>
         <Route path='/article/:slug' element={<Singleuser data={this.state} />}></Route>
+        {/* <Route path='/article/:slug' element={<Singleuser data={this.state} />}></Route> */}
         <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
         <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
       </Routes>

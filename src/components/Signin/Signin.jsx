@@ -31,12 +31,24 @@ validation =()=>{
     }
     return temp
 }
-onsubmit = (e)=>{
+onsubmit = async(e)=>{
     e.preventDefault()
     this.validation()
+    const {signinemail,signinpassword} = this.props.data
+    const userDetails = {signinemail,signinpassword}
+
+    const loginurl = 'https://reqres.in/api/users'
+    const options = {
+         method : 'POST',
+         body :  JSON.stringify(userDetails)
+    }
+    const response = await fetch(loginurl,options)
+    const data = await response.json()
+    console.log(data);
+
 }
   render() {
-    console.log(this.props.data);
+    // console.log(this.props.data);
     return (
       <div>
         <form className='d-flex flex-column align-items-center mt-5'>
