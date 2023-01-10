@@ -57,15 +57,7 @@ function Singleuser(props) {
           <div class="spinner-grow text-warning" role="status">
             <span class="sr-only">i</span>
           </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">n</span>
-          </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">g</span>
-          </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">.</span>
-          </div>
+          
       </div>
     )
   }

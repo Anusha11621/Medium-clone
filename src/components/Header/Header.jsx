@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../Header/header.css'
 
 class Notsignin extends Component {
@@ -105,10 +105,10 @@ class Signin extends Component {
             </div>
             <div >
                 <ul className='d-flex gap-4 mt-2 nav-ul'>
-                    <Link className='link ' to='/'><li className='d-none d-md-block'>Our Story</li></Link>
+                    <Link className='link ' to='/'><li className='d-none d-md-block'>Home</li></Link>
                     <Link className='link ' to='/'><li className='d-none d-md-block'>New Article</li></Link>
-                    <Link className='link ' to='/signin' ><li className='d-none d-sm-block'>sign In</li></Link>
-                    <Link className='link ' to='/signup'><li style={{ color: this.state.btnBgColor }}  >Sign Up</li></Link>
+                    <Link className='link ' to='/signin' ><li className='d-none d-sm-block'>Settings</li></Link>
+                    <Link className='link ' to='/signup'><li style={{ color: this.state.btnBgColor }}  >user_name</li></Link>
                 </ul>
             </div>
         </div>
@@ -120,7 +120,9 @@ class Signin extends Component {
 }
 
 export default class Header extends Component {
+  
  render(){
+  console.log(this.props.data.user);
   if(this.props.data.isLogIn === true){
     return <Signin></Signin>
   }
