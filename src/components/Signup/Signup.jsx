@@ -1,20 +1,53 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+// import {withRouter} from 'react-router'
 export default class Signup extends Component {
 constructor(props){
     super(props)
     this.state = {
-        // error : {
-        //     username:'',
-        //     password:'',
-        //     email:''
-        // }
         error:null,
-        user:null,
     }
+}
+posturl = ()=>{
+    const email = this.props.data.signupemail
+    const password = this.props.data.signuppassword
+    const username = this.props.data.signupusername
+    const signupurl = 'https://api.realworld.io/api/users'
+    const options = {
+         method : 'POST',
+         headers: {
+            'Content-Type': 'application/json'
+          },
+         body :  JSON.stringify({
+            user:{
+                username,
+                email,
+                password,    
+            }
+         })
+    }
+    fetch(signupurl,options)
+    .then((res)=>{
+        if(!res.ok){
+            res.json().then((error)=>{
+                return this.setState({
+                    error:error
+                })
+            })
+        }
+        else{
+            res.json().then((succ)=>{
+                this.props.updatedUser(succ.user)
+                window.location.replace('/');
+                console.log(succ.user);
+
+            })
+        }
+    })
 }
 validation =()=>{
     let temp = true
+ 
     if(this.props.data.signupemail == ''){
         this.props.error('signupemail','*Email should not be empty')
         temp = false
@@ -49,45 +82,9 @@ validation =()=>{
 }
 onsubmit = async(e)=>{
     e.preventDefault()
-    this.validation()
-    
-    const email = this.props.data.signupemail
-    const password = this.props.data.signuppassword
-    const username = this.props.data.signupusername
-    const signupurl = 'https://api.realworld.io/api/users'
-    const options = {
-         method : 'POST',
-         headers: {
-            'Content-Type': 'application/json'
-          },
-         body :  JSON.stringify({
-            user:{
-                username,
-                email,
-                password,    
-            }
-         })
+    if(this.validation()){
+        this.posturl()
     }
-    fetch(signupurl,options)
-    .then((res)=>{
-        if(!res.ok){
-            res.json().then((error)=>{
-                return this.setState({
-                    error:error
-                })
-            })
-        }
-        else{
-            res.json().then((succuss)=>{
-                return this.setState({
-                    user:succuss
-                })
-            })
-        }
-    })
-    
-    
-
 }
 error = ()=>{
     if(this.state.error){

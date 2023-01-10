@@ -6,7 +6,7 @@ constructor(props){
   }
   render() {
     if(this.props.data.multiuser){
-        console.log(this.props.data.tags.tags);
+        // console.log(this.props.data.tags.tags);
         return (
             <div className='container'>
                 <div className='row'>
@@ -60,22 +60,63 @@ constructor(props){
                         })
                     }  
                     </div>
-
-                        <div className='col-sm-12 col-md-4 d-none d-md-block bg-light h-100 mt-5 rounded' >
-                            <p>Popular Tags</p>
-                            <div className='d-flex flex-wrap gap-2'>
-                                {
-                                    this.props.data.tags.tags.map((data)=>{
-                                        return (
-                                        <p className='bg-secondary text-white p-1 rounded'>{data}</p>
-                                        )
-                                    })
-                                }
-                            </div>
+                    {
+                        this.props.data.tags ?
+                         <div className='col-sm-12 col-md-4 d-none d-md-block bg-light h-100 mt-5 rounded' >
+                        <p>Popular Tags</p>
+                        <div className='d-flex flex-wrap gap-2'>
+                            {
+                                this.props.data.tags.tags.map((data)=>{
+                                    return (
+                                    <p className='bg-secondary text-white p-1 rounded'>{data}</p>
+                                    )
+                                })
+                            }
                         </div>
+                    </div>: 
+                     <div className='col-sm-12 col-md-4 d-none d-md-block bg-light h-100 mt-5 rounded' >
+                     <p>Popular Tags</p>
+                     <div className='d-flex flex-wrap gap-2'>
+                     <h4>Tags are Loading....</h4>
+                     </div>
+                 </div>
+                    
+                    }
+                        
                 </div>
             </div>
           )
-    }  
+    } 
+    else if(!this.props.data.multiuser){
+       return (
+        <div className='p-5 m-5 d-flex justify-content-center gap-3'>
+        {/* <h3 className='pt-5 mt-3'>Loading....</h3> */}
+        <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">L</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">o</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">a</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">d</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">i</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">n</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">g</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">.</span>
+          </div>
+      </div>
+       )
+    } 
   }
 }

@@ -4,7 +4,7 @@ export default class Signin extends Component {
 constructor(props){
     super(props)
     this.state = {
-        isLoginin:true
+        error:null
     }
 }
 validation =()=>{
@@ -34,30 +34,57 @@ validation =()=>{
     }
     return temp
 }
-onsubmit = async(e)=>{
-    e.preventDefault()
-    this.validation()
-    
+
+postrequest = ()=>{
     const email = this.props.data.signinemail
     const password = this.props.data.signinpassword
     const loginurl = 'https://api.realworld.io/api/users/login'
     const options = {
-         method : 'POST',
-         headers: {
-            'Content-Type': 'application/json'
-          },
-         body :  JSON.stringify({
-            user:{
-                email,
-                password
-            }
-         })
-    }
-    const response = await fetch(loginurl,options)
-    const data = await response.json()
-    console.log(data);
-
+        method : 'POST',
+        headers: {
+           'Content-Type': 'application/json'
+         },
+        body :  JSON.stringify({
+           user:{
+               email,
+               password
+           }
+        })
+   }
+    fetch(loginurl,options)
+    .then((res)=>{
+        if(!res.ok){
+            res.json().then((error)=>{
+                return this.setState({
+                    error:error
+                })
+            })
+        }
+        else{
+            res.json().then((succ)=>{
+                this.props.updatedUser(succ.user)
+                window.location.replace('/');
+                console.log(succ.user);
+            })
+        }
+    })
 }
+
+error = ()=>{
+    if(this.state.error){
+        if(this.state.error.errors['email or password']){
+            return <p className='text-center text-danger'>*Email or username {this.state.error.errors['email or password']}</p>
+        }
+        }
+}
+onsubmit = async(e)=>{
+    e.preventDefault()
+    if(this.validation()){
+        this.postrequest()
+    }
+}
+
+
   render() {
     console.log(this.props.data.signinemail)
     console.log(this.onsubmit);
@@ -67,6 +94,7 @@ onsubmit = async(e)=>{
             <h1>Sign In</h1>
             <Link className='text-success' to='/signup'><p>Need an Account?</p></Link>
             <br></br>
+            {this.error()}
             <input id='signinemail' type={'email'} placeholder='Email' className='p-3' onChange={this.props.listener} ></input>
             <p className='text-danger'><b>{this.props.data.error.signinemail}</b></p>
                 <br></br>

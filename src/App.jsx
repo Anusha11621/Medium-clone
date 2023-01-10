@@ -30,6 +30,15 @@ export default class App extends Component {
       }
     }
   }
+  afterSuccussfullsignup = ()=>{
+    if(this.state.user){
+      this.setState({
+        signupemail:'',
+        signupusername:'',
+        signuppassword:'',
+    })
+    }
+  }
   valuesHandeler = (event)=>{
     let id = event.target.id
     let value = event.target.value
@@ -93,19 +102,19 @@ export default class App extends Component {
       return prevState
     })
   }
-  updateedUser = (user)=>{
-    this.setState({isLogIn:true,user})
+  updatedUser = (user)=>{
+    this.setState({isLogIn:true,user:user})
   }
   render() {
-    // console.log(this.state);
+    console.log(this.state.user);
     return (
       <BrowserRouter>
-      <Header updateedUser = {this.updateedUser}/>
+      <Header updateedUser = {this.updateedUser} data={this.state}/>
       <Routes>
         <Route path='/' match element={<Home data={this.state} />}></Route>
         <Route path='/article/:slug' element={<Singleuser data={this.state} />}></Route>
-        <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler} updateedUser = {this.updateedUser}/>}></Route>
-        <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler} updateedUser = {this.updateedUser}/>}></Route>
+        <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}   updatedUser = {this. updatedUser}/>}></Route>
+        <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}   updatedUser = {this. updatedUser} aftersignup = {this.afterSuccussfullsignup}/>} ></Route>
       </Routes>
       </BrowserRouter>
     )

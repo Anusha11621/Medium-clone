@@ -5,3 +5,8 @@
 .button{
     border: none;
 }
+#medium{
+    text-decoration: none;
+    color: black;
+    display: none;
+}
