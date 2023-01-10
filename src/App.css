@@ -5,8 +5,10 @@
 .button{
     border: none;
 }
-#medium{
+.hov{
     text-decoration: none;
-    color: black;
-    display: none;
+    color: rgb(189, 188, 188);
+}
+.tag{
+    background-color: rgb(194, 194, 194);
 }

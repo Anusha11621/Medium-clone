@@ -16,27 +16,8 @@ function Singleuser(props) {
     };
     apiCall(slug);
   }, [slug]);
-  console.log(response);
-  // const article = props.data.multiuser&&props.data.multiuser.articles.find((article)=>article.title === params)
-  // console.log(article);
-  // if(props.data.multiuser)
-  // return(
-  //   <div>
-  //     {
-  //       data.map((data)=>{
-  //         return (
-  //           <h1>{data.title}</h1>
-  //         )
-  //       })
-  //     }
-  //   </div>
-  // )
-
-  // return(
-  //   {
-  //     (response) ? (<div><h1>{response.title}</h1></div>):null
-  //   }
-  // )
+  // console.log(response);
+  
   if(!response){
     return (
       
@@ -59,6 +40,7 @@ function Singleuser(props) {
           </div>
           
       </div>
+      // <img src='https://cdn.dribbble.com/users/1175431/screenshots/5483835/2018-10-30__1_.gif'></img>
     )
   }
   else if(response){
@@ -80,8 +62,7 @@ function Singleuser(props) {
         <div>
           <h1>{response.title}</h1>
         </div>
-        <br></br>
-        
+        <br></br>  
       </div>
     )
   }
