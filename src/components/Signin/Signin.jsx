@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 export default class Signin extends Component {
 constructor(props){
     super(props)
+    this.state = {
+        isLoginin:true
+    }
 }
 validation =()=>{
     let temp = true
@@ -34,13 +37,21 @@ validation =()=>{
 onsubmit = async(e)=>{
     e.preventDefault()
     this.validation()
-    const {signinemail,signinpassword} = this.props.data
-    const userDetails = {signinemail,signinpassword}
-
-    const loginurl = 'https://reqres.in/api/users'
+    
+    const email = this.props.data.signinemail
+    const password = this.props.data.signinpassword
+    const loginurl = 'https://api.realworld.io/api/users/login'
     const options = {
          method : 'POST',
-         body :  JSON.stringify(userDetails)
+         headers: {
+            'Content-Type': 'application/json'
+          },
+         body :  JSON.stringify({
+            user:{
+                email,
+                password
+            }
+         })
     }
     const response = await fetch(loginurl,options)
     const data = await response.json()
@@ -48,9 +59,10 @@ onsubmit = async(e)=>{
 
 }
   render() {
-    // console.log(this.props.data);
+    console.log(this.props.data.signinemail)
+    console.log(this.onsubmit);
     return (
-      <div>
+      <div className='p-5'>
         <form className='d-flex flex-column align-items-center mt-5'>
             <h1>Sign In</h1>
             <Link className='text-success' to='/signup'><p>Need an Account?</p></Link>

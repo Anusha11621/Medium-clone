@@ -37,15 +37,34 @@ function Singleuser(props) {
   //     (response) ? (<div><h1>{response.title}</h1></div>):null
   //   }
   // )
-  if(response){
+  if(!response){
     return (
-      <div>
-        <h1>{response.title}</h1>
-      </div>
+      <h3 className='pt-5 mt-3'>Loading....</h3>
     )
   }
-  else{
-    null
+  else if(response){
+    return(
+      <div className=' p-5 mt-5'>
+        <div className='d-flex gap-2 align-items-center'>
+          <div>
+            <img src={response.author.image} className='rounded-circle'/>
+          </div>
+          <div>
+            <span>{response.author.username}</span>
+            <br></br>
+            <div>
+              <span>{response.createdAt.slice(0,10)}</span>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <div>
+          <h1>{response.title}</h1>
+        </div>
+        <br></br>
+        
+      </div>
+    )
   }
 }
 

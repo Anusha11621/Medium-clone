@@ -19,6 +19,8 @@ export default class App extends Component {
       signuppassword:'',
       multiuser:null,
       tags:null,
+      isLogIn:false,
+      user:null,
       error:{
         signinemail :'',
         signinpassword:'',
@@ -91,16 +93,19 @@ export default class App extends Component {
       return prevState
     })
   }
+  updateedUser = (user)=>{
+    this.setState({isLogIn:true,user})
+  }
   render() {
     // console.log(this.state);
     return (
       <BrowserRouter>
-      <Header/>
+      <Header updateedUser = {this.updateedUser}/>
       <Routes>
         <Route path='/' match element={<Home data={this.state} />}></Route>
         <Route path='/article/:slug' element={<Singleuser data={this.state} />}></Route>
-        <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
-        <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler}/>}></Route>
+        <Route path='/signin' element={<Signin  data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler} updateedUser = {this.updateedUser}/>}></Route>
+        <Route path='/signup' element={<Signup data={this.state} listener={this.valuesHandeler} error = {this.errorHandeler} updateedUser = {this.updateedUser}/>}></Route>
       </Routes>
       </BrowserRouter>
     )

@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom'
 export default class Signup extends Component {
 constructor(props){
     super(props)
+    this.state = {
+        // error : {
+        //     username:'',
+        //     password:'',
+        //     email:''
+        // }
+        error:null,
+        user:null,
+    }
 }
 validation =()=>{
     let temp = true
@@ -38,18 +47,76 @@ validation =()=>{
   }
     return temp
 }
-onsubmit = (e)=>{
+onsubmit = async(e)=>{
     e.preventDefault()
     this.validation()
+    
+    const email = this.props.data.signupemail
+    const password = this.props.data.signuppassword
+    const username = this.props.data.signupusername
+    const signupurl = 'https://api.realworld.io/api/users'
+    const options = {
+         method : 'POST',
+         headers: {
+            'Content-Type': 'application/json'
+          },
+         body :  JSON.stringify({
+            user:{
+                username,
+                email,
+                password,    
+            }
+         })
+    }
+    fetch(signupurl,options)
+    .then((res)=>{
+        if(!res.ok){
+            res.json().then((error)=>{
+                return this.setState({
+                    error:error
+                })
+            })
+        }
+        else{
+            res.json().then((succuss)=>{
+                return this.setState({
+                    user:succuss
+                })
+            })
+        }
+    })
+    
+    
+
+}
+error = ()=>{
+    if(this.state.error){
+    // console.log(this.state.error.errors);
+    // return <p>{this.state.error.errors.email}</p>
+    if(this.state.error.errors.email &&this.state.error.errors.username){
+        return <p className='text-center text-danger'>*Email and username {this.state.error.errors.email}</p>
+    }
+    else if(this.state.error.errors.username){
+        return <p  className='text-center text-danger'>Username {this.state.error.errors.username}</p>
+    }
+    else if(this.state.error.errors.email){
+        return <p className='text-center text-danger'>Email {this.state.error.errors.email}</p>
+    }
+    else{
+        return <p></p>
+    }
+    }
 }
   render() {
-    console.log(this.props.data);
+    console.log(this.state);
+    
     return (
-      <div>
+      <div className='p-5'>
         <form className='d-flex flex-column align-items-center mt-5'>
             <h1>Sign Up</h1>
             <Link className='text-success' to='/signin'><p>Have an Account?</p></Link>
             <br></br>
+            {this.error()}
             <input id='signupusername' type={'text'} placeholder='Username' className='p-3' onChange={this.props.listener} ></input>
             <p className='text-danger'><b>{this.props.data.error.signupusername}</b></p>
                 <br></br>
