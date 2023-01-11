@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../App.css";
-let createArticle = "https://api.realworld.io/api/articles";
+let createArticle = "https://starfish-app-k82y2.ondigitalocean.app/api/articles";
 export default class Newpost extends Component {
   constructor(props) {
     super(props);
