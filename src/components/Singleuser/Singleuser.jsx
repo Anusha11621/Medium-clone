@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom'
+import Loading from '../Loading';
 import axios from 'axios';
 function Singleuser(props) {
   const {slug} = useParams()
@@ -20,32 +21,15 @@ function Singleuser(props) {
   
   if(!response){
     return (
-      
-      <div className='p-5 m-5 d-flex justify-content-center gap-3'>
-        {/* <h3 className='pt-5 mt-3'>Loading....</h3> */}
-        <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">L</span>
-          </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">o</span>
-          </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">a</span>
-          </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">d</span>
-          </div>
-          <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">i</span>
-          </div>
-          
-      </div>
+      <Loading></Loading>
       // <img src='https://cdn.dribbble.com/users/1175431/screenshots/5483835/2018-10-30__1_.gif'></img>
     )
   }
   else if(response){
     return(
-      <div className=' p-5 mt-5'>
+      <div className='container p-5 mt-5'>
+        <div className='row'>
+        <div className='col-sm-12 col-lg-8'>
         <div className='d-flex gap-2 align-items-center'>
           <div>
             <img src={response.author.image} className='rounded-circle'/>
@@ -60,9 +44,28 @@ function Singleuser(props) {
         </div>
         <br></br>
         <div>
-          <h1>{response.title}</h1>
+          <h4>{response.title}</h4>
+          <h6 className='text-secondary'>{response.description}</h6>
+          <br></br>
+          <p className='lh-lg'>{response.body}</p>
+          <p className='d-flex gap-3 '>{response.tagList.map((tag)=>{
+            return <span className='bg-secondary p-2 rounded'>{tag}</span>
+          })}</p>
         </div>
-        <br></br>  
+        <br></br>
+        </div>
+        <div className='col-sm-12 col-lg-4 p-5 d-none d-lg-block'>
+          <button className='btn btn-dark px-5'>Get unlimited access</button>
+          <br></br>
+          <br></br>
+          <img src={response.author.image} className="w-25  rounded-circle"></img>
+          <br></br>
+          <br></br>
+          <h6>{response.author.username}</h6>
+          <p>{response.favoritesCount} Followers</p>
+          <button className='btn btn-warning'>Follow</button>
+        </div> 
+        </div> 
       </div>
     )
   }
