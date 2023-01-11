@@ -43,7 +43,7 @@ export default class Newpost extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("app__user"),
+        "Authorization":  `${localStorage.getItem("app__user")}`,
       },
       body: JSON.stringify({
         article: {
@@ -68,7 +68,7 @@ export default class Newpost extends Component {
     // }
   };
   render() {
-    console.log(this.state);
+    console.log(this.props.data.title);
     // console.log(localStorage.getItem("app__user"));
     return (
       <div>
@@ -78,7 +78,7 @@ export default class Newpost extends Component {
               id="title"
               className="settings"
               placeholder="Article Title"
-              onChange={this.handelinput}
+              onChange={this.props.listener}
               value={this.state.title}
             ></input>
             <p className="text-danger">
@@ -89,7 +89,7 @@ export default class Newpost extends Component {
               id="description"
               className="settings"
               placeholder="What's this article about?"
-              onChange={this.handelinput}
+              onChange={this.props.listener}
               value={this.state.description}
             ></input>
             <p className="text-danger">
@@ -101,7 +101,7 @@ export default class Newpost extends Component {
               className="settings"
               rows={"8"}
               placeholder="Write Your Article"
-              onChange={this.handelinput}
+              onChange={this.props.listener}
               value={this.state.body}
             ></textarea>
             <p className="text-danger">
@@ -112,7 +112,7 @@ export default class Newpost extends Component {
               id="tagList"
               className="settings"
               placeholder="Tags"
-              onChange={this.handelinput}
+              onChange={this.props.listener}
               value={this.state.tags}
             ></input>
 
