@@ -90,7 +90,11 @@ onsubmit = async(e)=>{
     console.log(this.props.data.signinemail)
     console.log(this.onsubmit);
     return (
-      <div className='p-5'>
+      <div className='p-5 mt-3 d-flex justify-content-center  gap-3'>
+        <div className="mt-3  d-none d-lg-block">
+            <img src='src\assets\Login.gif'></img>
+        </div>
+        <div>
         <form className='d-flex flex-column align-items-center mt-5'>
             <h1>Sign In</h1>
             <Link className='text-success' to='/signup'><p>Need an Account?</p></Link>
@@ -102,8 +106,9 @@ onsubmit = async(e)=>{
             <input id='signinpassword' type={'password'} placeholder='Password' className='p-3' onChange={this.props.listener}></input>
             <p className='text-danger'><b>{this.props.data.error.signinpassword}</b></p>
             
-            <button  type ='submit'className='btn btn-success d-flex' onClick={this.onsubmit}>Sign In</button>
+            <button  type ='submit'className='btn btn-warning px-5 d-flex' onClick={this.onsubmit}>Sign In</button>
         </form>
+        </div>
       </div>
     )
   }

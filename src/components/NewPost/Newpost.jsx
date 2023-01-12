@@ -11,7 +11,6 @@ export default class Newpost extends Component {
 
   validation = () => {
     let temp = true;
-
     if (this.props.data.title == "") {
       this.props.error("title", "*Title should not be empty");
       temp = false;
@@ -54,21 +53,31 @@ export default class Newpost extends Component {
         },
       }),
     };
-    fetch(createArticle, options)
-    // console.log(localStorage.getItem("app__user"));
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => console.log(localStorage.getItem("app__user")));
+    fetch(createArticle, options).then((res) => {
+      if (!res.ok) {
+        res.json().then((error) => {
+          return this.setState({
+            error: error,
+          });
+        });
+      } 
+      else {
+        res.json().then((succ) => {
+          this.props.updatedarticledata(succ);
+          window.location.replace("/article/+");
+          console.log(succ);
+        });
+      }
+    });
   };
   submitHandeler = (e) => {
     e.preventDefault();
-    // if (this.validation()) {
+    if (this.validation()) {
       this.postrequest();
-    // }
+    }
   };
   render() {
-    console.log(this.props.data.title);
+    console.log(this.props.data.multiuser&&this.props.data.multiuser.articles);
     // console.log(localStorage.getItem("app__user"));
     return (
       <div>

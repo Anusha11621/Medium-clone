@@ -216,7 +216,7 @@ class Signin extends Component {
 
 export default class Header extends Component {
   render() {
-    console.log(this.props.data.user);
+    // console.log(this.props.data.user);
     if (this.props.data.isLogIn === true) {
       return <Signin></Signin>;
     } else {

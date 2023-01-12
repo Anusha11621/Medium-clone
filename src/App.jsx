@@ -159,8 +159,12 @@ export default class App extends Component {
     this.setState({ isLogIn: true, user: user, isVerified: false });
     localStorage.setItem(localStorageKey, user.token);
   };
+  updatedarticledata = (articledata) => {
+    this.setState({ isLogIn: true, articledata: articledata, isVerified: false });
+    // localStorage.setItem(localStorageKey, user.token);
+  };
   render() {
-    console.log(this.state.user);
+    // console.log(this.state.user);
     if (!this.state.isVerified) {
       return <Loading></Loading>;
     } else {
@@ -185,6 +189,7 @@ export default class App extends Component {
                     data={this.state}
                     listener={this.valuesHandeler}
                     error={this.errorHandeler}
+                    updatedata = {this.updatedarticledata}
                   ></Newpost>
                 }
               ></Route>

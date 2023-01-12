@@ -33,7 +33,8 @@ export default class Signup extends Component {
             error: error,
           });
         });
-      } else {
+      } 
+      else {
         res.json().then((succ) => {
           this.props.updatedUser(succ.user);
           window.location.replace("/");
@@ -115,8 +116,12 @@ export default class Signup extends Component {
     console.log(this.state);
 
     return (
-      <div className="p-5">
-        <form className="d-flex flex-column align-items-center mt-5">
+      <div className="p-5 mt-3 d-flex  justify-content-center gap-3">
+        <div className="mt-5  d-none d-lg-block">
+            <img src="src\assets\Sign up.gif"></img>
+        </div>
+        <div>
+        <form className="d-flex flex-column  align-items-center mt-5">
           <h1>Sign Up</h1>
           <Link className="text-success" to="/signin">
             <p>Have an Account?</p>
@@ -158,12 +163,14 @@ export default class Signup extends Component {
 
           <button
             type="submit"
-            className="btn btn-success d-flex"
+            className="btn px-5 btn-warning d-flex"
             onClick={this.onsubmit}
           >
             Sign Up
           </button>
         </form>
+        </div>
+        
       </div>
     );
   }
