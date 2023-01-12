@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import login from '../../assets/Login.gif'
 // import {withRouter} from 'react-router-dom'
 class Signin extends Component {
 constructor(props){
@@ -92,7 +93,7 @@ onsubmit = async(e)=>{
     return (
       <div className='p-5 mt-3 d-flex justify-content-center  gap-3'>
         <div className="mt-3  d-none d-lg-block">
-            <img src='src\assets\Login.gif'></img>
+            <img src={login}></img>
         </div>
         <div>
         <form className='d-flex flex-column align-items-center mt-5'>
