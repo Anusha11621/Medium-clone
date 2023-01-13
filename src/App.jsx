@@ -9,10 +9,14 @@ import Newpost from "./components/NewPost/Newpost";
 import Settings from "./components/Settings/Settings";
 import Loading from "./components/Loading";
 import Error from "./components/Error/Error";
+import Profile from "./components/Profile/Profile";
+import Comments from "./components/Comments/Comments";
+import EditArticle from "./components/EditArticle/EditArticle";
 let url = "https://api.realworld.io/api/articles";
 let tagsurl = "https://api.realworld.io/api/tags";
 let usersurl = "https://api.realworld.io/api/user";
 let localStorageKey = "app__user";
+let localStorageuser = "article__user" 
 
 export default class App extends Component {
   constructor(props) {
@@ -127,23 +131,6 @@ export default class App extends Component {
         });
       });
     if (localStorage[localStorageKey]) {
-      // fetch(usersurl,{
-      //   method : 'GET',
-      //   headers:{
-      //     "authentication" :`Token ${localStorage[localStorageKey]}`
-      //   }
-      // })
-      // .then((res)=>{
-      //   if(res.ok){
-      //     return res.json()
-      //   }
-      // })
-      // .then(({user})=>this.updatedUser(user))
-      // .then((data)=>{
-      //   this.setState({
-      //     isLogIn : true
-      //   })
-      // })
       this.setState({
         isLogIn: true,
       });
@@ -158,6 +145,8 @@ export default class App extends Component {
   updatedUser = (user) => {
     this.setState({ isLogIn: true, user: user, isVerified: false });
     localStorage.setItem(localStorageKey, user.token);
+    localStorage.setItem('user_name',user.username)
+    localStorage.setItem(localStorageuser,JSON.stringify(user))
   };
   updatedarticledata = (articledata) => {
     this.setState({ isLogIn: true, articledata: articledata, isVerified: false });
@@ -165,13 +154,14 @@ export default class App extends Component {
   };
   render() {
     // console.log(this.state.user);
+    // console.log(localStorage.getItem("article__user"))
     if (!this.state.isVerified) {
       return <Loading></Loading>;
     } else {
       if (this.state.isLogIn === true) {
         return (
           <BrowserRouter>
-            <Header updateedUser={this.updateedUser} data={this.state} />
+            <Header updateedUser={this.updatedUser} data={this.state} />
             <Routes>
               <Route
                 path="/"
@@ -194,14 +184,18 @@ export default class App extends Component {
                 }
               ></Route>
               <Route path="/settings" element={<Settings></Settings>}></Route>
+              <Route path="/profile" element={<Profile data={this.state}></Profile>}></Route>
+              <Route path="/edit/:slug" element={<EditArticle></EditArticle>}></Route>
+              <Route path="/comments" element={<Comments data={this.state}></Comments>}></Route>
               <Route path="*" element={<Error></Error>}></Route>
             </Routes>
           </BrowserRouter>
         );
-      } else {
+      } 
+      else {
         return (
           <BrowserRouter>
-            <Header updateedUser={this.updateedUser} data={this.state} />
+            <Header updateedUser={this.updatedUser} data={this.state} />
             <Routes>
               <Route
                 path="/"
@@ -234,7 +228,26 @@ export default class App extends Component {
                   />
                 }
               ></Route>
+              <Route
+                path="/editor"
+                element={<Signin
+                  data={this.state}
+                  listener={this.valuesHandeler}
+                  error={this.errorHandeler}
+                  updatedUser={this.updatedUser}
+                />}
+              ></Route>
+              <Route
+                path="/settings"
+                element={<Signin
+                  data={this.state}
+                  listener={this.valuesHandeler}
+                  error={this.errorHandeler}
+                  updatedUser={this.updatedUser}
+                />}
+              ></Route>
               <Route path="*" element={<Error></Error>}></Route>
+              <Route path="/comments" element={<Comments data={this.state}></Comments>}></Route>
             </Routes>
           </BrowserRouter>
         );

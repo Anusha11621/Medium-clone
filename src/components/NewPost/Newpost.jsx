@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../App.css";
-let createArticle = "https://starfish-app-k82y2.ondigitalocean.app/api/articles";
+let createArticle = "https://api.realworld.io/api/articles";
 export default class Newpost extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +42,8 @@ export default class Newpost extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization":  `${localStorage.getItem("app__user")}`,
+        authorization: `Token ${localStorage.getItem("app__user")}`
+        // "Authorization":  `${localStorage.getItem("app__user")}`,
       },
       body: JSON.stringify({
         article: {
@@ -63,8 +64,8 @@ export default class Newpost extends Component {
       } 
       else {
         res.json().then((succ) => {
-          this.props.updatedarticledata(succ);
-          window.location.replace("/article/+");
+          this.props.updatedata(succ.article);
+          window.location.replace("/");
           console.log(succ);
         });
       }
@@ -77,7 +78,7 @@ export default class Newpost extends Component {
     }
   };
   render() {
-    console.log(this.props.data.multiuser&&this.props.data.multiuser.articles);
+    // console.log(this.props.data.multiuser&&this.props.data.multiuser.articles);
     // console.log(localStorage.getItem("app__user"));
     return (
       <div>

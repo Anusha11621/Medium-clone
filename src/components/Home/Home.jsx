@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Multipleusers from "../Multipleusers/Multipleusers";
+import PrivateHome from "../PrivateHome/PrivateHome";
 import "../../App.css";
+import { Link } from "react-router-dom";
 // let url = 'https://api.realworld.io/api/articles'
 
 export default class Home extends Component {
@@ -14,8 +16,22 @@ export default class Home extends Component {
     // console.log(this.props.data);
     if (this.props.data.isLogIn) {
       return (
-        <div className="multiuser">
+        <div className="multiuser container">
+          <div class="tabs">
+            <input type="radio" name="tabs" id="tabone" checked="checked"/>
+            <label for="tabone">Your Feed</label>
+            <div class="tab pl-2">
+        
+        <PrivateHome></PrivateHome>
+        </div>
+      
+        <input type="radio" name="tabs" id="tabtwo"/>
+        <label for="tabtwo">Global feed</label>
+        <div class="tab">
           <Multipleusers data={this.props.data} />
+        </div>
+    </div>
+
         </div>
       );
     } else if (!this.props.data.isLogIn) {
@@ -28,9 +44,11 @@ export default class Home extends Component {
               topic.
             </h4>
             <br></br>
-            <button className="btn btn-dark "> Get Started</button>
+            <Link className="link" to='/signup'><button className="btn btn-dark "> Get Started</button></Link>
           </div>
           <br></br>
+
+          
           <Multipleusers data={this.props.data} />
         </div>
       );

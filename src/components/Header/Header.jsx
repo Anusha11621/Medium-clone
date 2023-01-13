@@ -150,7 +150,7 @@ class Signin extends Component {
                           aria-expanded="false"
                           style={{ border: "none", background: "white" }}
                         >
-                          <svg
+                          {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="26"
                             height="26"
@@ -163,7 +163,8 @@ class Signin extends Component {
                               fillrule="evenodd"
                               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
                             />
-                          </svg>
+                          </svg> */}
+                          <img src={JSON.parse(localStorage.getItem('article__user')).image} className=' rounded-circle' style={{width:'25px',height:'25px'}}></img>
                           &nbsp;
                         </button>
                         <ul class="dropdown-menu">
@@ -177,14 +178,16 @@ class Signin extends Component {
                           <li>
                             <Link to={"/settings"} className="link">
                               <a class="dropdown-item" href="#">
-                                <b>Profile </b>
+                                <b>Settings </b>
                               </a>
                             </Link>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="#">
-                              Something else here
-                            </a>
+                          <Link to={"/profile"} className="link">
+                              <a class="dropdown-item" href="#">
+                                <b>Profile</b>
+                              </a>
+                            </Link>
                           </li>
                           <li>
                             <hr class="dropdown-divider" />

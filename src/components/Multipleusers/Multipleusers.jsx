@@ -12,8 +12,12 @@ export default class Multipleusers extends Component {
         <div className="container px-5">
           <div className="row">
             <div className="col-sm-12 col-md-7 ">
-              <h6 className="text-success">Global Feed</h6>
-              <hr></hr>
+              {
+                !this.props.data.isLogIn ? <div>
+                  <h6 className="text-success">Global Feed</h6>
+                  <hr></hr>
+                </div>:<></>
+              }
               {this.props.data.multiuser.articles.map((data) => {
                 return (
                   <>
