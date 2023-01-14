@@ -1,11 +1,24 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Loading from "../Loading";
+// let tags = document.querySelector('')
 export default class Multipleusers extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isclicked :false,
+      tagvalue:''
+    }
   }
+  // tagsclicked = ()=>{
+
+  // }
+
   render() {
+    console.log(this.props.data.tags&&this.props.data.tags.tags);
+    console.log(this.props.data.multiuser&&this.props.data.multiuser.articles.map((data)=>{
+      return data.tagList
+    }))
     if (this.props.data.multiuser) {
       // console.log(this.props.data.tags.tags);
       return (
@@ -79,7 +92,7 @@ export default class Multipleusers extends Component {
                 <div className="d-flex flex-wrap gap-2">
                   {this.props.data.tags.tags.map((data) => {
                     return (
-                      <p className="border border-secondary text-gray p-1 rounded">
+                      <p className="border border-secondary text-gray p-1 rounded" id='tags' onClick={this.tagsclicked}>
                         {data}
                       </p>
                     );

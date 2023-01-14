@@ -128,7 +128,7 @@ export default class Newpost extends Component {
 
             <div>
               <button
-                className="btn btn-success m-3"
+                className="btn btn-success m-3 px-5"
                 onClick={this.submitHandeler}
               >
                 Publish

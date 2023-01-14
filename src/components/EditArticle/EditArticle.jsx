@@ -48,7 +48,7 @@ const navigator = useNavigate()
       .catch((error) => {
         console.error("Error:", error);
       });
-      navigator("/")
+      window.location.replace("/")
   };
   const theme = createTheme();
 
@@ -76,22 +76,20 @@ const navigator = useNavigate()
             <CssBaseline />
             <Box
               sx={{
-                marginTop: 8,
+                marginTop: 10,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
               }}
             >
-              <Typography component="h1" variant="h5">
-                Edit Post
-              </Typography>
+              <h3 className="text-secondary"><b>Edit Post</b></h3>
               <Box
                 component="form"
                 noValidate
                 onSubmit={handleSubmit}
                 sx={{ mt: 3 }}
               >
-                <Grid container spacing={2}>
+                <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <TextField
                       autoComplete="given-name"
@@ -149,6 +147,56 @@ const navigator = useNavigate()
             </Box>
           </Container>
         </ThemeProvider>
+      //   <div>
+      //   <form>
+      //     <div className=" text-center" style={{ paddingTop: "100px" }}>
+      //       <input
+      //         id="title"
+      //         className="settings"
+      //         placeholder="Article Title"
+      //         // onChange={this.props.listener}
+      //         defaultValue={articleData.title}
+      //       ></input>
+            
+      //       <br></br>
+      //       <input
+      //         id="description"
+      //         className="settings"
+      //         placeholder="What's this article about?"
+      //         // onChange={this.props.listener}
+      //         defaultValue={articleData.description}
+      //       ></input>
+      //       <br></br>
+
+      //       <textarea
+      //         id="body"
+      //         className="settings"
+      //         rows={"8"}
+      //         placeholder="Write Your Article"
+      //         // onChange={this.props.listener}
+      //         defaultValue={articleData.body}
+      //       ></textarea>
+      //       <br></br>
+
+      //       <input
+      //         id="tagList"
+      //         className="settings"
+      //         placeholder="Tags"
+      //         // onChange={this.props.listener}
+      //         defaultValue={articleData.tagList}
+      //       ></input>
+
+      //       <div>
+      //         <button
+      //           className="btn btn-success m-3 px-5"
+      //           onSubmit={handleSubmit}
+      //         >
+      //           Publish
+      //         </button>
+      //       </div>
+      //     </div>
+      //   </form>
+      // </div>
       ) : <Loading></Loading>}
     </>
   );

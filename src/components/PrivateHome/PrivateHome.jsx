@@ -36,46 +36,19 @@ export default class PrivateHome extends Component {
                 return (
                   <>
                     <Link className="link" to={`/article/${data.slug}`}>
-                      {/* <div
-                        key={data.slug}
-                        className="d-flex align-items-center gap-3 "
-                      >
+                      <div className='d-flex align-items-center gap-2'>
                         <div>
-                          <div className="d-flex justify-content-between">
-                            <div className="d-flex  align-items-center">
-                              <div>
-                                <img
-                                  src={data.author.image}
-                                  className="rounded-circle w-25 h-25"
-                                />
-                              </div>
-                              <div>
-                                <span>{data.author.username}</span>
-                                <br></br>
-                              </div>
-                            </div>
-                            
-                          </div>
+                          <img src ={data.author.image} style={{height:'40px',width:'40px'}} className="rounded-circle"></img>
+                        </div>
+                        <div>
+                          <span>{data.author.username}</span>
                           <br></br>
-                          <h5>{data.title}</h5>
-                          <p className="text-secondary">
-                            {data.description.slice(0, 110)}
-                          </p>
-                          <div className="d-flex flex-wrap gap-2 text-secondary ">
-                            <p>Read More...</p>
-                            <p>.</p>
-                            <p>{Math.floor(Math.random() * 10 + 1)}min read</p>
-                            <p>.</p>
-                            <span>{data.tagList[0]}</span>
-                          </div>
+                          
+                          <span>{data.createdAt.slice(0,10)}</span>
                         </div>
-                        <div>
-                          <img
-                            src="https://miro.medium.com/fit/c/250/168/1*IODA6FO8_7mtqSX8KyWt-Q.png"
-                            className="w-100 h-75 d-none d-md-block"
-                          ></img>
-                        </div>
-                      </div> */}
+                        
+                      </div>
+                      <br></br>
                       <h5>{data.title}</h5>
                       <p className='text-secondary'>{data.description}</p>
                     </Link>
