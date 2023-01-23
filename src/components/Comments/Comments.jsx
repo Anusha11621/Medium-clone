@@ -16,11 +16,30 @@ export default class Comments extends Component {
         comment:event.target.value
       })
     }
+    ongetmethod = ()=>{
+      fetch(`https://api.realworld.io/api/articles/${this.props.data.slug}/comments`,{
+        method:'GET',
+        headers:{
+          "Content-Type": "application/json",
+          authorization: `Token ${localStorage.getItem("app__user")}`
+        }
+      })
+      .then((res)=>{return res.json()})
+      .then((data)=>{
+        return(
+          this.setState({
+            getcomments:data
+          })
+        )
+        // return console.log(data);
+      })
+    }
+    componentDidMount(){
+      this.ongetmethod()
+
+    }
     onPostMethod = ()=>{
-      // let slug = (this.props.data.multiuser&&this.props.data.multiuser.articles.map((data)=>{
-      //   return data.slug
-      // }));
-      fetch(`https://api.realworld.io/api/articles/:slug/comments`,{
+      fetch(`https://api.realworld.io/api/articles/${this.props.data.slug}/comments`,{
         method : 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -36,34 +55,25 @@ export default class Comments extends Component {
         
       })
     }
-    ongetmethod = ()=>{
-      fetch('https://api.realworld.io/api/articles/:slug/comments',{
-        method:'GET',
-        headers:{
-          "Content-Type": "application/json",
-          authorization: `Token ${localStorage.getItem("app__user")}`
-        }
-      })
-      .then((res)=>{return res.json()})
-      .then((data)=>{
-        return(
-          this.setState({
-            getcomments:data
-          })
-        )
-      })
-    }
-    componentDidMount(){
-      this.ongetmethod()
-    }
+    
     onSubmit = ()=>{
+      this.ongetmethod()
       this.onPostMethod()
       this.setState({
         onclick:true
       })
+      
+      
     }
   render() {
-    
+    // console.log(this.props.data.slug);
+    let comments = (this.state.getcomments&&this.state.getcomments.comments&&this.state.getcomments.comments.map((data)=>{
+      return data.body}))
+    // console.log(comments);
+    // let dat = comments.forEach((data)=>{
+    //   return data
+    // })
+    // console.log(dat);
     return(
         <div >
           <hr></hr>
@@ -85,9 +95,19 @@ export default class Comments extends Component {
                  to  comment on a post
                 </b>
               </p>
-            }{
-               this.state.onclick?<p>{this.state.comment}</p>:""
             }
+            {
+               this.state.onclick?<p>{
+                comments.map((data)=>{
+                  return <p>{data}</p>
+                })
+                }</p>:""
+            }
+            {/* {
+              this.state.onclick?<div>
+
+              </div>:<></>
+            } */}
         </div>
     )
   }

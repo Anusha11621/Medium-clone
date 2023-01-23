@@ -124,9 +124,9 @@ function Singleuser(props) {
           </div>
         </div>
         <div>
-        <Comments data={props.data}></Comments>
+        <Comments data={response}></Comments>
         </div>
-      </div>
+      </div> 
     );
   }
 }
