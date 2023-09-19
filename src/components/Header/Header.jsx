@@ -55,8 +55,8 @@ class Notsignin extends Component {
                     </li>
                   </Link>
                   <Link className="link " to="/signup">
-                    <li style={{ background: this.state.btnBgColor,color:'white',padding:'5px',borderRadius:'20px' }}>
-                      <b>Get started</b>
+                    <li style={{ background: this.state.btnBgColor,color:'white',padding:'5px 15px',borderRadius:'20px' }}>
+                      Get started
                     </li>
                   </Link>
                 </ul>

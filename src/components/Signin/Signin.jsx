@@ -91,7 +91,7 @@ onsubmit = async(e)=>{
     console.log(this.props.data.signinemail)
     console.log(this.onsubmit);
     return (
-      <div className='p-5 mt-3 d-flex justify-content-center  gap-3'>
+      <div className='p-5 mt-3 d-flex justify-content-center   gap-3'>
         <div className="mt-3  d-none d-lg-block">
             <img src={login}></img>
         </div>
